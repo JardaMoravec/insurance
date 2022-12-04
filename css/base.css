@@ -1,0 +1,89 @@
+body {
+    background: #dddddd;
+    color: #324e6a;
+}
+h1, h2, h3 {
+
+}
+.page {
+    margin: 0 auto;
+    width: 800px;
+    background: #ffffff;
+    border: 1px solid #324e6a;
+    box-shadow: 3px 3px 4px silver;
+    padding: 15px;
+}
+footer {
+    margin-top: 15px;
+    text-align: center;
+}
+.logo img {
+    width: 100px;
+}
+nav ul {
+    list-style: none;
+    padding: 5px;
+    background-color: #324e6a;
+}
+nav ul li {
+    cursor: pointer;
+    background-color: #dddddd;
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+nav ul li.save {
+    background-color: red;
+}
+nav ul li:hover {
+    background-color: #f2f2f2;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-container > * {
+    margin: 10px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+table td,
+table th {
+    border: 1px solid #04acbc;
+    padding: 8px;
+}
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04ACBC;
+    color: white;
+}
+table a {
+    cursor: pointer;
+}
+
+form {
+
+}
+form .formBox {
+    background-color: #f2f2f2;
+    margin: 5px;
+    padding: 5px 10px;
+}
+form .formBox label {
+    min-width: 200px;
+    text-align: right;
+    margin-right: 15px;
+}
