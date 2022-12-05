@@ -6,7 +6,7 @@ export class PersonTable extends BaseTable {
 
     constructor(persons, evens) {
         super(persons, evens);
-        this.titles = ['Jméno', 'Příjmení', 'Věk', 'Telefon', '', ''];
+        this.titles = ['Jméno', 'Příjmení', 'Věk', 'Telefon', '', '', ''];
     }
 
     createRow(person) {
@@ -17,6 +17,7 @@ export class PersonTable extends BaseTable {
         tr.appendChild(this.createBox(person.age));
         tr.appendChild(this.createBox(person.phoneNumber));
 
+        tr.appendChild(this.createButtonBox(person.id, 'Info', this.evens['info']));
         tr.appendChild(this.createButtonBox(person.id, 'Upravit', this.evens['edit']));
         tr.appendChild(this.createButtonBox(person.id, 'Smazat', this.evens['delete']));
 

@@ -1,7 +1,8 @@
 export class BaseForm {
 
-    constructor(defaultData) {
+    constructor(defaultData, saveFunction) {
         this.defaultData = defaultData;
+        this.saveFunction = saveFunction;
         this.fields = [];
     }
 
@@ -29,6 +30,7 @@ export class BaseForm {
         let button = document.createElement("button");
         button.innerText = "Uložit";
 
+        form.onsubmit = this.saveFunction;
         form.appendChild(button);
 
         return form;

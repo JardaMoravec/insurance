@@ -14,4 +14,16 @@ export class Person {
         return `id ${this.id} -  ${this.firstName} ${this.sureName} (věk: ${this.age}), tel.: ${this.phoneNumber} `;
     }
 
+    static fromForm(form) {
+        const formData = new FormData(form);
+
+        return new Person(
+            parseInt(formData.get("id")),
+            formData.get("firstName"),
+            formData.get("sureName"),
+            parseInt(formData.get("age")),
+            formData.get("phoneNumber"),
+        );
+    }
+
 }
