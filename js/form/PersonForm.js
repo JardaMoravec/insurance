@@ -1,3 +1,5 @@
+'use strict';
+
 import {BaseForm} from "./BaseForm.js";
 
 export class PersonForm extends BaseForm {

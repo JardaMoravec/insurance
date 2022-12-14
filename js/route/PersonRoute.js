@@ -1,12 +1,20 @@
+'use strict';
+
 import {PersonTable} from "../table/PersonTable.js";
 import {PersonForm} from "../form/PersonForm.js";
 import {Person} from "../model/Person.js";
+import {insuranceAddRoute, insuranceDeleteRoute, insuranceEditRoute} from "./InsuranceRoute.js";
+import {InsuranceTable} from "../table/InsuranceTable.js";
 
 export const userListRoute = function () {
     let content = document.getElementById('content');
     content.innerHTML = `<h1>${window.menu["person"].title}</h1>`;
 
-    let table = new PersonTable(window.persons, {'info': userInfoRoute, 'edit': userEditRoute, 'delete': userDeleteRoute});
+    let table = new PersonTable(window.persons, {
+        'info': userInfoRoute,
+        'edit': userEditRoute,
+        'delete': userDeleteRoute
+    });
     content.appendChild(table.create());
 };
 
@@ -22,7 +30,7 @@ const userAddSaveRoute = function (event) {
     const form = event.target;
 
     const person = Person.fromForm(form);
-    person.id = 10;
+    person.id = window.persons.getPersonLastId() + 1;
     console.log(person);
 
     window.persons.push(person);
@@ -54,6 +62,7 @@ const userEditSaveRoute = function (event) {
 
     for (let i = 0; i < window.persons.length; i++) {
         if (window.persons[i].id === person.id) {
+            person.insuranceList = window.persons[i].insuranceList;
             window.persons[i] = person;
         }
     }
@@ -83,8 +92,13 @@ export const userDeleteRoute = function (event) {
 };
 
 export const userInfoRoute = function (event) {
-    let content = document.getElementById('content');
     let id = parseInt(event.target.dataset['id']);
+    userInfo(id);
+}
+
+export const userInfo = function (id) {
+    id = parseInt(id);
+    let content = document.getElementById('content');
     content.innerHTML = `<h1>Informace o pojištěnci s id:${id}</h1>`;
 
     let user;
@@ -125,14 +139,62 @@ export const userInfoRoute = function (event) {
     tdPhone.innerText = `${user.phoneNumber}`;
     tr3.appendChild(tdPhone);
 
+    let tr4 = document.createElement("tr");
+
+    let thCount = document.createElement("th");
+    thCount.innerText = "Počet pojištění:";
+    tr4.appendChild(thCount);
+
+    let tdCount = document.createElement("td");
+    tdCount.innerText = `${user.insuranceList.length}`;
+    tr4.appendChild(tdCount);
+
+    let tr5 = document.createElement("tr");
+
+    let thPriceLimit = document.createElement("th");
+    thPriceLimit.innerText = "Majetek pojištěna na celkovou částku:";
+    tr5.appendChild(thPriceLimit);
+
+    let tdPriceLimit = document.createElement("td");
+    tdPriceLimit.innerText = `${user.totalPriceLimit} Kč`;
+    tr5.appendChild(tdPriceLimit);
+
+    let tr6 = document.createElement("tr");
+
+    let thPricePerMonth = document.createElement("th");
+    thPricePerMonth.innerText = "Celková mesíční platba pojištění:";
+    tr6.appendChild(thPricePerMonth);
+
+    let tdPricePerMonth = document.createElement("td");
+    tdPricePerMonth.innerText = `${user.totalPricePreMonth} Kč`;
+    tr6.appendChild(tdPricePerMonth);
+
     table.appendChild(tr1);
     table.appendChild(tr2);
     table.appendChild(tr3);
+    table.appendChild(tr4);
+    table.appendChild(tr5);
+    table.appendChild(tr6);
     content.appendChild(table);
 
     let insuranceListTitle = document.createElement("h2");
     insuranceListTitle.innerText = "Seznam pojištění";
     content.appendChild(insuranceListTitle);
+
+    let newInsuranceButton = document.createElement("button");
+    newInsuranceButton.innerText = "Přidat nové pojištění";
+    newInsuranceButton.setAttribute("type", "button");
+    newInsuranceButton.setAttribute("data-person", id);
+    newInsuranceButton.onclick = insuranceAddRoute;
+
+    content.appendChild(newInsuranceButton);
+
+    let insuranceTable = new InsuranceTable(user.insuranceList, {
+        'info': null,
+        'edit': insuranceEditRoute,
+        'delete': insuranceDeleteRoute
+    });
+    content.appendChild(insuranceTable.create());
 }
 
 

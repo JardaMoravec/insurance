@@ -13,9 +13,19 @@ export class BaseTable {
         let header = this.createHeader();
         this.table.appendChild(header);
 
-        for (let person of this.data) {
-            person.tableRow = this.createRow(person);
-            this.table.appendChild(person.tableRow);
+        if (this.data.length > 0) {
+            for (let person of this.data) {
+                person.tableRow = this.createRow(person);
+                this.table.appendChild(person.tableRow);
+            }
+        } else {
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            td.innerText = "žádné údaje";
+            td.setAttribute("colspan", this.titles.length + 3)
+
+            tr.appendChild(td);
+            this.table.appendChild(tr);
         }
         return this.table;
     }
@@ -42,7 +52,7 @@ export class BaseTable {
 
     createBox(value) {
         let td = document.createElement("td");
-        td.innerHTML = value;
+        td.innerHTML = (value!= null? value : "nezadáno");
         return td;
     }
 
