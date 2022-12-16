@@ -18,9 +18,9 @@ export class PersonTable extends BaseTable {
         tr.appendChild(this.createBox(person.phoneNumber));
         tr.appendChild(this.createBox(person.insuranceList.length));
 
-        tr.appendChild(this.createButtonBox(person.id, 'Info', this.evens['info']));
-        tr.appendChild(this.createButtonBox(person.id, 'Upravit', this.evens['edit']));
-        tr.appendChild(this.createButtonBox(person.id, 'Smazat', this.evens['delete']));
+        tr.appendChild(this.createButtonBox(person.id, 'Info','bi-person', this.evens['info']));
+        tr.appendChild(this.createButtonBox(person.id, 'Upravit','bi-person-gear', this.evens['edit']));
+        tr.appendChild(this.createButtonBox(person.id, 'Smazat','bi-person-x', this.evens['delete']));
 
         return tr;
     }

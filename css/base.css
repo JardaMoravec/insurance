@@ -6,8 +6,6 @@ h1, h2, h3 {
 
 }
 .page {
-    margin: 0 auto;
-    width: 800px;
     background: #ffffff;
     border: 1px solid #324e6a;
     box-shadow: 3px 3px 4px silver;
@@ -20,23 +18,17 @@ footer {
 .logo img {
     width: 100px;
 }
-nav ul {
-    list-style: none;
-    padding: 5px;
-    background-color: #324e6a;
-}
-nav ul li {
+#mainNav li>span{
     cursor: pointer;
-    background-color: #dddddd;
     text-align: center;
-    vertical-align: middle;
-    text-transform: uppercase;
 }
-nav ul li.save {
-    background-color: red;
+#mainNav li>span.bi{
+    font-size: 1.5em;
 }
-nav ul li:hover {
-    background-color: #f2f2f2;
+#mainNav li.save {
+    background-color: #870e0e;
+    color: #f2f2f2;
+    border-radius: 6px;
 }
 
 .flex-container {
@@ -72,18 +64,4 @@ table th {
 }
 table a {
     cursor: pointer;
-}
-
-form {
-
-}
-form .formBox {
-    background-color: #f2f2f2;
-    margin: 5px;
-    padding: 5px 10px;
-}
-form .formBox label {
-    min-width: 200px;
-    text-align: right;
-    margin-right: 15px;
 }

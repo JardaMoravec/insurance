@@ -12,25 +12,44 @@ import {insuranceListRoute, insuranceAddRoute} from "./route/InsuranceRoute.js";
 import {getInsuranceLastId, getPersonLastId, loadFromLocalStorage, popById, saveChanges} from "./function.js";
 
 window.menu = {
-    'person': {'label': 'Pojištěnci', 'title': 'Seznam pojištěnců', 'route': userListRoute},
-    'insurance': {'label': 'Pojištění', 'title': 'Seznam pojištění', 'route': insuranceListRoute},
-    'add_person': {'label': 'Nový pojištěnec', 'title': 'Nový pojištěnec', 'route': userAddRoute},
-    'add_insurance': {'label': 'Nové pojištění', 'title': 'Nové pojištění', 'route': insuranceAddRoute},
+    'person': {'label': 'Pojištěnci', 'title': 'Seznam pojištěnců',  'route': userListRoute, 'icon': 'bi-person'},
+    'insurance': {'label': 'Pojištění', 'title': 'Seznam pojištění', 'route': insuranceListRoute, 'icon': 'bi-database'},
+    'add_person': {'label': 'Nový pojištěnec', 'title': 'Nový pojištěnec', 'route': userAddRoute, 'icon': 'bi-person-add'},
+    'add_insurance': {'label': 'Nové pojištění', 'title': 'Nové pojištění', 'route': insuranceAddRoute, 'icon': 'bi-database-add'},
 };
 
 window.onload = function () {
     let menuElm = document.getElementById('mainNav');
     for (let key in menu) {
         let li = document.createElement("li");
-        li.innerHTML = menu[key].label;
         li.onclick = menu[key].route;
+
+        let icon = document.createElement("span");
+        icon.classList.add("bi", menu[key].icon, "d-block", "mx-auto");
+        li.appendChild(icon);
+
+        let span = document.createElement("span");
+        span.innerHTML = menu[key].label;
+
+        span.classList.add("nav-link");
+        span.classList.add("text-secondary");
+        li.appendChild(span);
         menuElm.appendChild(li);
     }
     let li = document.createElement("li");
-    li.setAttribute("title", "Uloží všechny provedené změny do paměti.");
     li.classList.add("save");
-    li.innerHTML = "Uložit změny";
-    li.onclick = saveChanges;
+
+    let icon = document.createElement("span");
+    icon.classList.add("bi", "bi-save", "d-block", "mx-auto");
+    li.appendChild(icon);
+
+    let span = document.createElement("span");
+    span.setAttribute("title", "Uloží všechny provedené změny do paměti.");
+    span.innerHTML = "Uložit změny";
+    span.onclick = saveChanges;
+    span.classList.add("nav-link");
+    span.classList.add("text-secondary");
+    li.appendChild(span);
     menuElm.appendChild(li);
 
     window.persons = [];

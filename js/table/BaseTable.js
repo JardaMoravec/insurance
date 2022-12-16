@@ -2,8 +2,9 @@
 
 export class BaseTable {
 
-    constructor(persons, evens) {
+    constructor(persons, evens, cssClass="table-hover") {
         this.table = document.createElement("table");
+        this.table.classList.add(cssClass);
         this.data = persons;
         this.evens = evens;
         this.titles = [];
@@ -56,11 +57,11 @@ export class BaseTable {
         return td;
     }
 
-    createButtonBox(id, title, event) {
+    createButtonBox(id, title, icon, event) {
         let td = document.createElement("td");
         let deleteButton = document.createElement("a");
         deleteButton.setAttribute('data-id', id)
-        deleteButton.innerHTML = title;
+        deleteButton.innerHTML = `<span class='bi ${icon}'></span> ${title}`;
         deleteButton.onclick = event;
         td.appendChild(deleteButton);
         return td;

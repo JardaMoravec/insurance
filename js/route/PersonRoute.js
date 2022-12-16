@@ -182,9 +182,10 @@ export const userInfo = function (id) {
     content.appendChild(insuranceListTitle);
 
     let newInsuranceButton = document.createElement("button");
-    newInsuranceButton.innerText = "Přidat nové pojištění";
+    newInsuranceButton.innerHTML = `<span class="bi bi-database-add"></span> Přidat nové pojištění`;
     newInsuranceButton.setAttribute("type", "button");
     newInsuranceButton.setAttribute("data-person", id);
+    newInsuranceButton.classList.add("btn", "btn-success", "mb-3")
     newInsuranceButton.onclick = insuranceAddRoute;
 
     content.appendChild(newInsuranceButton);
