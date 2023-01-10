@@ -6,7 +6,7 @@ export class InsuranceTable extends BaseTable {
 
     constructor(persons, evens) {
         super(persons, evens);
-        this.titles = ['Název', 'Maximální jištěn', 'Měsiční platba', 'Platnost od', 'Platnost do', '', '', ''];
+        this.titles = ['Název', 'Maximální jištění', 'Měsiční platba', 'Platnost od', 'Platnost do', '', '', ''];
     }
 
     createRow(insurance) {
@@ -18,9 +18,9 @@ export class InsuranceTable extends BaseTable {
         tr.appendChild(this.createBox(insurance.validFrom));
         tr.appendChild(this.createBox(insurance.validTo));
 
-        tr.appendChild(this.createButtonBox(insurance.id, 'Info','bi-database', this.evens['info']));
-        tr.appendChild(this.createButtonBox(insurance.id, 'Upravit','bi-database-gear', this.evens['edit']));
-        tr.appendChild(this.createButtonBox(insurance.id, 'Smazat','bi-database-x', this.evens['delete']));
+        tr.appendChild(this.createButtonBox(insurance.id, 'Info', 'bi-database', this.evens['info']));
+        tr.appendChild(this.createButtonBox(insurance.id, 'Upravit', 'bi-database-gear', this.evens['edit']));
+        tr.appendChild(this.createButtonBox(insurance.id, 'Smazat', 'bi-database-x', this.evens['delete']));
 
         return tr;
     }

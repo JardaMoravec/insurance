@@ -23,8 +23,8 @@ export class Insurance {
             formData.get("name"),
             parseFloat(formData.get("priceLimit")),
             parseFloat(formData.get("pricePerMonth")),
-            formData.get("validFrom") != null && formData.get("validFrom") !== ""? new Date(formData.get("validFrom")) : null,
-            formData.get("validTo") != null && formData.get("validTo") !== ""? new Date(formData.get("validTo")): null,
+            formData.get("validFrom") != null && formData.get("validFrom") !== "" ? new Date(formData.get("validFrom")) : null,
+            formData.get("validTo") != null && formData.get("validTo") !== "" ? new Date(formData.get("validTo")) : null,
         );
     }
 

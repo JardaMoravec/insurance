@@ -1,6 +1,7 @@
 'use strict';
 
 import {Person} from "./model/Person.js";
+
 export const saveChanges = function () {
     localStorage.setItem("persons", JSON.stringify(window.persons));
     alert("Všechna data byla uložena");
@@ -8,7 +9,7 @@ export const saveChanges = function () {
 export const popById = function (id, event) {
     for (let i = 0; i < this.length; i++) {
         for (let e = 0; e < this[i].insuranceList.length; e++) {
-            if (this[i].id === id) {
+            if (this[i].insuranceList[e].id === id) {
                 return event(i, e);
             }
         }
@@ -43,4 +44,18 @@ export const loadFromLocalStorage = function () {
             this.push(Person.fromJson(person));
         }
     }
+}
+
+export const addRow = function (header, value) {
+    let tr = document.createElement("tr");
+
+    let th = document.createElement("th");
+    th.innerText = header;
+    tr.appendChild(th);
+
+    let td = document.createElement("td");
+    td.innerText = (value != null ? value : "nezadáno");
+    tr.appendChild(td);
+
+    this.appendChild(tr);
 }

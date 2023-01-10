@@ -2,9 +2,6 @@
 
 /*
 *  @todo kontroly dat a hlasky
-*  @todo bootstrap
-*  @todo info pojištěni
-*  @todo editace pojištěni
 **/
 
 import {userListRoute, userAddRoute} from "./route/PersonRoute.js";
@@ -12,10 +9,25 @@ import {insuranceListRoute, insuranceAddRoute} from "./route/InsuranceRoute.js";
 import {getInsuranceLastId, getPersonLastId, loadFromLocalStorage, popById, saveChanges} from "./function.js";
 
 window.menu = {
-    'person': {'label': 'Pojištěnci', 'title': 'Seznam pojištěnců',  'route': userListRoute, 'icon': 'bi-person'},
-    'insurance': {'label': 'Pojištění', 'title': 'Seznam pojištění', 'route': insuranceListRoute, 'icon': 'bi-database'},
-    'add_person': {'label': 'Nový pojištěnec', 'title': 'Nový pojištěnec', 'route': userAddRoute, 'icon': 'bi-person-add'},
-    'add_insurance': {'label': 'Nové pojištění', 'title': 'Nové pojištění', 'route': insuranceAddRoute, 'icon': 'bi-database-add'},
+    'person': {'label': 'Pojištěnci', 'title': 'Seznam pojištěnců', 'route': userListRoute, 'icon': 'bi-person'},
+    'insurance': {
+        'label': 'Pojištění',
+        'title': 'Seznam pojištění',
+        'route': insuranceListRoute,
+        'icon': 'bi-database'
+    },
+    'add_person': {
+        'label': 'Nový pojištěnec',
+        'title': 'Nový pojištěnec',
+        'route': userAddRoute,
+        'icon': 'bi-person-add'
+    },
+    'add_insurance': {
+        'label': 'Nové pojištění',
+        'title': 'Nové pojištění',
+        'route': insuranceAddRoute,
+        'icon': 'bi-database-add'
+    },
 };
 
 window.onload = function () {

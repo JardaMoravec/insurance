@@ -2,7 +2,7 @@
 
 export class BaseTable {
 
-    constructor(persons, evens, cssClass="table-hover") {
+    constructor(persons, evens, cssClass = "table-hover") {
         this.table = document.createElement("table");
         this.table.classList.add(cssClass);
         this.data = persons;
@@ -53,7 +53,7 @@ export class BaseTable {
 
     createBox(value) {
         let td = document.createElement("td");
-        td.innerHTML = (value!= null? value : "nezadáno");
+        td.innerHTML = (value != null ? value : "nezadáno");
         return td;
     }
 

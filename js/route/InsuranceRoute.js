@@ -4,6 +4,7 @@ import {InsuranceForm} from "../form/InsuranceForm.js";
 import {Insurance} from "../model/Insurance.js";
 import {InsuranceTable} from "../table/InsuranceTable.js";
 import {userInfo} from "./PersonRoute.js";
+import {addRow} from "../function.js";
 
 
 export const insuranceListRoute = function () {
@@ -16,7 +17,7 @@ export const insuranceListRoute = function () {
     }
 
     let table = new InsuranceTable(insuranceList, {
-        'info': null,
+        'info': insuranceInfoRoute,
         'edit': insuranceEditRoute,
         'delete': insuranceDeleteRoute
     });
@@ -38,20 +39,24 @@ export const insuranceAddRoute = function (event) {
 const insuranceAddSaveRoute = function (event) {
     const form = event.target;
 
-    const insurance = Insurance.fromForm(form);
-    insurance.id = window.persons.getInsuranceLastId() + 1;
+    try {
+        const insurance = Insurance.fromForm(form);
+        insurance.id = window.persons.getInsuranceLastId() + 1;
 
-    const formData = new FormData(form);
-    const personId = parseInt(formData.get("person"));
+        const formData = new FormData(form);
+        const personId = parseInt(formData.get("person"));
 
-    for (let i = 0; i < window.persons.length; i++) {
-        if (window.persons[i].id === personId) {
-            window.persons[i].insuranceList.push(insurance);
-            console.log(window.persons[i]);
+        for (let i = 0; i < window.persons.length; i++) {
+            if (window.persons[i].id === personId) {
+                window.persons[i].insuranceList.push(insurance);
+            }
         }
+        userInfo(personId);
+
+    } catch (e) {
+        alert("Data se nepodařilo uložit!");
     }
 
-    userInfo(personId);
     return false;
 }
 
@@ -63,8 +68,11 @@ export const insuranceEditRoute = function (event) {
     let insurance;
     window.persons.popById(id, function (i, e) {
         insurance = window.persons[i].insuranceList[e];
+        insurance.person = window.persons[i].id;
     });
-    console.log(insurance);
+
+    insurance.validTo = insurance.validTo != null ? insurance.validTo.split('T')[0] : null;
+    insurance.validFrom = insurance.validFrom != null ? insurance.validFrom.split('T')[0] : null;
 
     let form = new InsuranceForm(insurance, insuranceEditSaveRoute);
     content.appendChild(form.create());
@@ -72,9 +80,45 @@ export const insuranceEditRoute = function (event) {
 
 export const insuranceEditSaveRoute = function (event) {
     const form = event.target;
-    let personId = 1;
-    userInfo(personId);
+    let personId = null;
+
+    try {
+        const insurance = Insurance.fromForm(form);
+        console.log(insurance);
+
+        window.persons.popById(insurance.id, function (i, e) {
+            window.persons[i].insuranceList[e] = insurance;
+            personId = window.persons[i].id;
+        });
+
+        userInfo(personId);
+    } catch (e) {
+        alert("Data se nepodařilo uložit!");
+    }
+
     return false;
+}
+
+export const insuranceInfoRoute = function (event) {
+    let content = document.getElementById('content');
+    let id = parseInt(event.target.dataset['id']);
+    content.innerHTML = `<h1>Informace o pojištění s id:${id}</h1>`;
+
+    let insurance;
+    window.persons.popById(id, function (i, e) {
+        insurance = window.persons[i].insuranceList[e];
+    });
+
+    let table = document.createElement("table");
+    table.addRow = addRow;
+
+    table.addRow("Název:", insurance.name);
+    table.addRow("Maximální jištění:", `${insurance.priceLimit} Kč`);
+    table.addRow("Měsiční platba:", `${insurance.pricePerMonth} Kč`);
+    table.addRow("Platnost od:", insurance.validFrom);
+    table.addRow("Platnost do:", insurance.validTo);
+
+    content.appendChild(table);
 }
 
 export const insuranceDeleteRoute = function (event) {
@@ -87,6 +131,7 @@ export const insuranceDeleteRoute = function (event) {
     let ok = false;
 
     window.persons.popById(id, function (i, e) {
+        console.log(window.persons[i].insuranceList[e]);
         window.persons[i].insuranceList.splice(e, 1);
         ok = true;
     });

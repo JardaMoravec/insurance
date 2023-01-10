@@ -18,7 +18,7 @@ export class Person {
     }
 
     toOption() {
-        return {"id": this.id, "label": `${this.firstName} ${this.sureName} (id: ${this.id})` }
+        return {"id": this.id, "label": `${this.firstName} ${this.sureName} (id: ${this.id})`}
     }
 
     get totalPriceLimit() {

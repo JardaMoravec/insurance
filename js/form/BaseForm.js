@@ -1,4 +1,5 @@
 'use strict';
+
 export class BaseForm {
 
     constructor(defaultData, saveFunction) {
@@ -35,10 +36,10 @@ export class BaseForm {
                         fieldElm.appendChild(optionElm);
                     }
                     if (this.defaultData != null) {
-                        fieldElm.value =  this.defaultData[field.name];
+                        fieldElm.value = this.defaultData[field.name];
                     }
 
-                } else  {
+                } else {
                     fieldElm = document.createElement("div");
                     fieldElm.innerText = "Nejdříve vložte nějaké pojištěnce!";
                 }
