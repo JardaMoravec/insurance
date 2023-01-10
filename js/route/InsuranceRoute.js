@@ -84,7 +84,6 @@ export const insuranceEditSaveRoute = function (event) {
 
     try {
         const insurance = Insurance.fromForm(form);
-        console.log(insurance);
 
         window.persons.popById(insurance.id, function (i, e) {
             window.persons[i].insuranceList[e] = insurance;
@@ -131,7 +130,6 @@ export const insuranceDeleteRoute = function (event) {
     let ok = false;
 
     window.persons.popById(id, function (i, e) {
-        console.log(window.persons[i].insuranceList[e]);
         window.persons[i].insuranceList.splice(e, 1);
         ok = true;
     });

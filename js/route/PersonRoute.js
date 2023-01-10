@@ -33,7 +33,6 @@ const userAddSaveRoute = function (event) {
     try {
         const person = Person.fromForm(form);
         person.id = window.persons.getPersonLastId() + 1;
-        console.log(person);
 
         window.persons.push(person);
     } catch (e) {
