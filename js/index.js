@@ -1,9 +1,5 @@
 'use strict';
 
-/*
-*  @todo kontroly dat a hlasky
-**/
-
 import {userListRoute, userAddRoute} from "./route/PersonRoute.js";
 import {insuranceListRoute, insuranceAddRoute} from "./route/InsuranceRoute.js";
 import {getInsuranceLastId, getPersonLastId, loadFromLocalStorage, popById, saveChanges} from "./function.js";
